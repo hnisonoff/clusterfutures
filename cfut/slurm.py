@@ -17,7 +17,7 @@ def submit_text(job):
     with open(filename, 'w') as f:
         f.write(job)
     jobid, _ = chcall('sbatch --parsable {}'.format(filename))
-    jobid = jobid.split(';')[0] # if cluster name is present --parsable will return jobid;clustername
+    jobid = jobid.decode().split(';')[0] # if cluster name is present --parsable will return jobid;clustername
     os.unlink(filename)
     return int(jobid)
 
